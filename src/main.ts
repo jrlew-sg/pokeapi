@@ -2,8 +2,9 @@
 
 import { Command, OptionValues } from 'commander'
 
-import { GetPokemonResults, PokemonDetail } from './models/pokeapi';
-import { Results, CategoryResults } from './models/results'
+import { GetPokemonResults } from './models/pokeapi';
+import { Results } from './models/results'
+import { addToResults, generateNewResultsCategory, parseAndPrintResults } from './results';
 
 import { getPokemon, getPokemonDetails } from './services/pokeapi';
 
@@ -22,6 +23,7 @@ async function main() {
     });
 
     await getAllPokemonDetails(pokemon);
+
     console.log(`Ellapsed Time: ${((Date.now() - time) / 1000).toFixed(2)} seconds`);
 }
 
@@ -39,7 +41,7 @@ function getCommandLineArgs(): OptionValues {
 
 async function getAllPokemonDetails(pokemon: GetPokemonResults) {
     let results: Results = {
-        all: addNewResultsTypeEntry()
+        all: generateNewResultsCategory()
     }
 
     const promises = []
@@ -54,41 +56,4 @@ async function getAllPokemonDetails(pokemon: GetPokemonResults) {
 
     console.log(results);
     parseAndPrintResults(results);
-}
-
-function parseAndPrintResults(results: Results) {
-    for (const type in results) {
-        results[type].avgHeight = (results[type].totalHeight / results[type].count).toFixed(2)
-        results[type].avgWeight = (results[type].totalWeight / results[type].count).toFixed(2)
-        console.log(`${type} (${results[type].count})- Average Height: ${results[type].avgHeight}dm - Average Weight: ${results[type].avgWeight}hg`)
-    }
-}
-
-function addToResults(results: Results, pokemonDetails: PokemonDetail) {
-    results.all.count++;
-    results.all.totalHeight += pokemonDetails.height
-    results.all.totalWeight += pokemonDetails.weight
-
-    pokemonDetails.types.forEach(type => {
-        const typeName = type.type.name;
-        if (!results.hasOwnProperty(typeName)) {
-            console.log(`Adding ${typeName} to results`)
-            results[typeName] = addNewResultsTypeEntry();
-        }
-        results[typeName].count++;
-        results[typeName].totalHeight += pokemonDetails.height
-        results[typeName].totalWeight += pokemonDetails.weight
-    });
-
-    return results;
-}
-
-function addNewResultsTypeEntry(): CategoryResults {
-    return {
-        count: 0,
-        avgHeight: "",
-        totalHeight: 0,
-        avgWeight: "",
-        totalWeight: 0,
-    }
 }
