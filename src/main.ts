@@ -15,8 +15,6 @@ async function main() {
 
     const args: OptionValues = getCommandLineArgs();
 
-    console.log(`Limit: ${args.limit} - Offset: ${args.offset}`)
-
     const pokemon = await getPokemon({
         offset: args.offset,
         limit: args.limit
@@ -54,6 +52,5 @@ async function getAllPokemonDetails(pokemon: GetPokemonResults) {
         results = addToResults(results, res)
     })
 
-    console.log(results);
     parseAndPrintResults(results);
 }

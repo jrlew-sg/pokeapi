@@ -19,7 +19,6 @@ export function addToResults(results: Results, pokemonDetails: PokemonDetail) {
     pokemonDetails.types.forEach(type => {
         const typeName = type.type.name;
         if (!Object.prototype.hasOwnProperty.call(results, typeName)) {
-            console.log(`Adding ${typeName} to results`)
             results[typeName] = generateNewResultsCategory();
         }
         results[typeName].count++;
