@@ -15,10 +15,6 @@ export interface PokemonSummary {
     url: string,
 }
 
-export interface GetPokemonDetailsResults {
-
-}
-
 export interface PokemonDetail {
     height: number,
     weight: number,

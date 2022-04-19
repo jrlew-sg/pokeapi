@@ -1,5 +1,5 @@
 import { PokemonDetail } from './models/pokeapi';
-import { generateNewResultsCategory, addToResults, parseAndPrintResults } from './results'
+import { generateNewResultsCategory, addToResults } from './results'
 
 test("Generates New Results Entry", () => {
     const results = {};
