@@ -1,12 +1,12 @@
 export interface Results {
-    all: CategoryResults
-    [index: string]: CategoryResults
+  all?: CategoryResults
+  [index: string]: CategoryResults
 }
 
 export interface CategoryResults {
-    count: number
-    avgHeight: string,
-    totalHeight: number,
-    avgWeight: string,
-    totalWeight: number,
+  count: number
+  avgHeight: number,
+  totalHeight: number,
+  avgWeight: number,
+  totalWeight: number,
 }
