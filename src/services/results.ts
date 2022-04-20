@@ -6,9 +6,9 @@ export class ResultsService {
   public static generateNewResultsCategory(): CategoryResults {
     return {
       count: 0,
-      avgHeight: 0,
+      averageHeight: 0,
       totalHeight: 0,
-      avgWeight: 0,
+      averageWeight: 0,
       totalWeight: 0,
     };
   }
@@ -31,10 +31,10 @@ export class ResultsService {
     return results;
   }
 
-  public static parseAndPrintResults(results: Results) {
+  public static calculateAverages(results: Results) {
     for (const type in results) {
-      results[type].avgHeight = parseFloat((results[type].totalHeight / results[type].count).toFixed(2));
-      results[type].avgWeight = parseFloat((results[type].totalWeight / results[type].count).toFixed(2));
+      results[type].averageHeight = parseFloat((results[type].totalHeight / results[type].count).toFixed(2));
+      results[type].averageWeight = parseFloat((results[type].totalWeight / results[type].count).toFixed(2));
     }
     return results;
   }

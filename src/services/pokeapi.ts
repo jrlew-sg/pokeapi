@@ -42,9 +42,9 @@ export class PokeApiService {
       limit,
     });
     
-    return this.getAllPokemonDetails(pokemon);
+    const results = await this.getAllPokemonDetails(pokemon);
+    return ResultsService.calculateAverages(results);
   }
-
 
   public static async getAllPokemonDetails(pokemon: GetPokemonResults): Promise<Results> {
     let results: Results = {
